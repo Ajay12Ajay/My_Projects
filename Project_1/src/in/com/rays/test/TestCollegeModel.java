@@ -5,81 +5,74 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import in.com.rays.bean.RoleBean;
-import in.com.rays.model.RoleModel;
+import in.com.rays.bean.CollegeBean;
+import in.com.rays.model.CollegeModel;
 
-public class TestRoleModel {
+public class TestCollegeModel {
 	public static void main(String[] args) throws Exception {
-		testAdd();
+
+		// testAdd();
 		// testUpdate();
 		// testDelete();
 		// testFindByPk();
-		// testFindByName();
-		// testSearch();
+		testSearch();
 
 	}
 
 	public static void testAdd() throws Exception {
+		CollegeBean bean = new CollegeBean();
 
-		RoleBean bean = new RoleBean();
-		bean.setName("Python Developer");
-		bean.setDescription("He is a python dev. ");
+		bean.setName("SVCE");
+		bean.setAddress("address of SVCE");
+		bean.setState("MP");
+		bean.setCity("Indore");
+		bean.setPhoneNo("1212121212");
 		bean.setCratedBy("ADMIN");
 		bean.setModifiedBy("ADMIN");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 
-		RoleModel model = new RoleModel();
+		CollegeModel model = new CollegeModel();
 		model.add(bean);
-
 	}
 
 	public static void testUpdate() throws Exception {
-		RoleBean bean = new RoleBean();
-		bean.setId(4);
-		bean.setName("Front-End Developer");
-		bean.setDescription("testing row ");
+
+		CollegeBean bean = new CollegeBean();
+
+		bean.setId(1);
+		bean.setName("SVCE");
+		bean.setAddress("address of SVCE");
+		bean.setState("MP");
+		bean.setCity("Indore");
+		bean.setPhoneNo("1212121212");
 		bean.setCratedBy("ADMIN");
 		bean.setModifiedBy("ADMIN");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 
-		RoleModel model = new RoleModel();
+		CollegeModel model = new CollegeModel();
 		model.update(bean);
 
 	}
 
 	public static void testDelete() throws Exception {
 
-		RoleModel model = new RoleModel();
-		model.delete(4);
+		CollegeModel model = new CollegeModel();
+		model.delete(2);
 	}
 
 	public static void testFindByPk() throws Exception {
-		RoleModel model = new RoleModel();
-		RoleBean bean = model.findByPk(2);
+		CollegeModel model = new CollegeModel();
+		CollegeBean bean = model.findByPk(1);
 
 		if (bean != null) {
 			System.out.print("\t" + bean.getId());
 			System.out.print("\t" + bean.getName());
-			System.out.print("\t" + bean.getDescription());
-			System.out.print("\t" + bean.getCratedBy());
-			System.out.print("\t" + bean.getModifiedBy());
-			System.out.print("\t" + bean.getCreatedDatetime());
-			System.out.println("\t" + bean.getModifiedDatetime());
-		} else {
-			System.out.println("id doesn't exists");
-		}
-	}
-
-	public static void testFindByName() throws Exception {
-		RoleModel model = new RoleModel();
-		RoleBean bean = model.findByName("Tester");
-
-		if (bean != null) {
-			System.out.print("\t" + bean.getId());
-			System.out.print("\t" + bean.getName());
-			System.out.print("\t" + bean.getDescription());
+			System.out.print("\t" + bean.getAddress());
+			System.out.print("\t" + bean.getState());
+			System.out.print("\t" + bean.getCity());
+			System.out.print("\t" + bean.getPhoneNo());
 			System.out.print("\t" + bean.getCratedBy());
 			System.out.print("\t" + bean.getModifiedBy());
 			System.out.print("\t" + bean.getCreatedDatetime());
@@ -90,30 +83,40 @@ public class TestRoleModel {
 	}
 
 	public static void testSearch() throws Exception {
-		RoleBean bean = new RoleBean();
-		// bean.setId(2);
-		// bean.setName("HR");
-		// bean.setDescription();
+
+		CollegeBean bean = new CollegeBean();
+		 //bean.setId(1);
+		 //bean.setName("SVCE");
+		 //bean.setAddress("address of SVCE");
+		 //bean.setCity("Indore");
+		// bean.setState("MP");
+		// bean.setPhoneNo("1212121212");
 		// bean.setCratedBy("ADMIN");
-		// bean.setModifiedBy();
+		// bean.setModifiedBy("ADMIN");
 		// bean.setCreatedDatetime();
 		// bean.setModifiedDatetime();
 
-		RoleModel model = new RoleModel();
-		List list = model.search(bean, 1, 5);
+		CollegeModel model = new CollegeModel();
+		List list = model.search(bean, 1, 1);
 
 		Iterator it = list.iterator();
 
 		while (it.hasNext()) {
-			bean = (RoleBean) it.next();
+			bean = (CollegeBean) it.next();
+
 			System.out.print("\t" + bean.getId());
 			System.out.print("\t" + bean.getName());
-			System.out.print("\t" + bean.getDescription());
+			System.out.print("\t" + bean.getAddress());
+			System.out.print("\t" + bean.getState());
+			System.out.print("\t" + bean.getCity());
+			System.out.print("\t" + bean.getPhoneNo());
 			System.out.print("\t" + bean.getCratedBy());
 			System.out.print("\t" + bean.getModifiedBy());
 			System.out.print("\t" + bean.getCreatedDatetime());
 			System.out.println("\t" + bean.getModifiedDatetime());
+
 		}
+
 	}
 
 }

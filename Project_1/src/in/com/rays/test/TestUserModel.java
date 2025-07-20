@@ -6,9 +6,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import in.com.rays.bean.RoleBean;
+
 import in.com.rays.bean.UserBean;
-import in.com.rays.model.RoleModel;
 import in.com.rays.model.UserModel;
 
 public class TestUserModel {
