@@ -5,114 +5,139 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import in.com.rays.bean.RoleBean;
-import in.com.rays.model.RoleModel;
+import in.com.rays.bean.CourseBean;
+import in.com.rays.bean.SubjectBean;
+import in.com.rays.model.CourseModel;
+import in.com.rays.model.SubjectModel;
 
-public class TestRoleModel {
+public class TestSubjectModel {
 	public static void main(String[] args) throws Exception {
-		testAdd();
+
+		// testAdd();
 		// testUpdate();
 		// testDelete();
 		// testFindByPk();
 		// testFindByName();
-		// testSearch();
+		testSearch();
 
 	}
 
 	public static void testAdd() throws Exception {
 
-		RoleBean bean = new RoleBean();
-		bean.setName("Python Developer");
-		bean.setDescription("He is a python dev. ");
+		SubjectBean bean = new SubjectBean();
+		bean.setName("Chemistry");
+		bean.setCourseId(102);
+		bean.setCourseName("FSD");
+		bean.setDescription("Full Stack Developer");
 		bean.setCreatedBy("ADMIN");
 		bean.setModifiedBy("ADMIN");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 
-		RoleModel model = new RoleModel();
+		SubjectModel model = new SubjectModel();
 		model.add(bean);
-
 	}
 
 	public static void testUpdate() throws Exception {
-		RoleBean bean = new RoleBean();
-		bean.setId(4);
-		bean.setName("Front-End Developer");
-		bean.setDescription("testing row ");
+
+		SubjectBean bean = new SubjectBean();
+
+		bean.setId(1);
+		bean.setName("Physics");
+		bean.setCourseId(101);
+		bean.setCourseName("FSD");
+		bean.setDescription("Full Stack Developer");
 		bean.setCreatedBy("ADMIN");
 		bean.setModifiedBy("ADMIN");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 
-		RoleModel model = new RoleModel();
+		SubjectModel model = new SubjectModel();
 		model.update(bean);
 
 	}
 
 	public static void testDelete() throws Exception {
 
-		RoleModel model = new RoleModel();
-		model.delete(4);
+		SubjectModel model = new SubjectModel();
+		model.delete(3);
 	}
 
 	public static void testFindByPk() throws Exception {
-		RoleModel model = new RoleModel();
-		RoleBean bean = model.findByPk(2);
+
+		SubjectModel model = new SubjectModel();
+		SubjectBean bean = model.findByPk(1);
 
 		if (bean != null) {
 			System.out.print("\t" + bean.getId());
 			System.out.print("\t" + bean.getName());
+			System.out.print("\t" + bean.getCourseId());
+			System.out.print("\t" + bean.getCourseName());
 			System.out.print("\t" + bean.getDescription());
-			System.out.print("\t" + bean.getCreatedBy());
+			System.out.print("\t" + bean.getCreatedDatetime());
 			System.out.print("\t" + bean.getModifiedBy());
 			System.out.print("\t" + bean.getCreatedDatetime());
 			System.out.println("\t" + bean.getModifiedDatetime());
 		} else {
-			System.out.println("id doesn't exists");
+			System.out.println("id doesnt exist...!");
 		}
+
 	}
 
 	public static void testFindByName() throws Exception {
-		RoleModel model = new RoleModel();
-		RoleBean bean = model.findByName("Tester");
+
+		SubjectModel model = new SubjectModel();
+		SubjectBean bean = model.findByName("Physics");
 
 		if (bean != null) {
 			System.out.print("\t" + bean.getId());
 			System.out.print("\t" + bean.getName());
+			System.out.print("\t" + bean.getCourseId());
+			System.out.print("\t" + bean.getCourseName());
 			System.out.print("\t" + bean.getDescription());
-			System.out.print("\t" + bean.getCreatedBy());
+			System.out.print("\t" + bean.getCreatedDatetime());
 			System.out.print("\t" + bean.getModifiedBy());
 			System.out.print("\t" + bean.getCreatedDatetime());
 			System.out.println("\t" + bean.getModifiedDatetime());
 		} else {
-			System.out.println("id doesn't exists");
+			System.out.println("id doesnt exist...!");
 		}
+
 	}
 
 	public static void testSearch() throws Exception {
-		RoleBean bean = new RoleBean();
-		// bean.setId(2);
-		// bean.setName("HR");
-		// bean.setDescription();
+
+		SubjectBean bean = new SubjectBean();
+		// bean.setId(1);
+		// bean.setName("SVCE");
+		// bean.setCourseId();
+		// bean.setCourseName("SVCE");
+
+		// bean.setDescription("Indore");
 		// bean.setCreatedBy("ADMIN");
-		// bean.setModifiedBy();
+		// bean.setModifiedBy("ADMIN");
 		// bean.setCreatedDatetime();
 		// bean.setModifiedDatetime();
 
-		RoleModel model = new RoleModel();
-		List list = model.search(bean, 1, 5);
+		SubjectModel model = new SubjectModel();
+		List list = model.search(bean, 1, 1);
 
 		Iterator it = list.iterator();
 
 		while (it.hasNext()) {
-			bean = (RoleBean) it.next();
+			bean = (SubjectBean) it.next();
+
 			System.out.print("\t" + bean.getId());
 			System.out.print("\t" + bean.getName());
+			System.out.print("\t" + bean.getCourseId());
+			System.out.print("\t" + bean.getCourseName());
 			System.out.print("\t" + bean.getDescription());
+
 			System.out.print("\t" + bean.getCreatedBy());
 			System.out.print("\t" + bean.getModifiedBy());
 			System.out.print("\t" + bean.getCreatedDatetime());
 			System.out.println("\t" + bean.getModifiedDatetime());
+
 		}
 	}
 

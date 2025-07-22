@@ -54,7 +54,7 @@ public class UserModel {
 			pstmt.setString(7, bean.getMobileNo());
 			pstmt.setLong(8, bean.getRoleId());
 			pstmt.setString(9, bean.getGender());
-			pstmt.setString(10, bean.getCratedBy());
+			pstmt.setString(10, bean.getCreatedBy());
 			pstmt.setString(11, bean.getModifiedBy());
 			pstmt.setTimestamp(12, bean.getCreatedDatetime());
 			pstmt.setTimestamp(13, bean.getModifiedDatetime());
@@ -103,7 +103,7 @@ public class UserModel {
 			pstmt.setString(6, bean.getMobileNo());
 			pstmt.setLong(7, bean.getRoleId());
 			pstmt.setString(8, bean.getGender());
-			pstmt.setString(9, bean.getCratedBy());
+			pstmt.setString(9, bean.getCreatedBy());
 			pstmt.setString(10, bean.getModifiedBy());
 			pstmt.setTimestamp(11, bean.getCreatedDatetime());
 			pstmt.setTimestamp(12, bean.getModifiedDatetime());
@@ -155,7 +155,7 @@ public class UserModel {
 			bean.setMobileNo(rs.getString(7));
 			bean.setRoleId(rs.getLong(8));
 			bean.setGender(rs.getString(9));
-			bean.setCratedBy(rs.getString(10));
+			bean.setCreatedBy(rs.getString(10));
 			bean.setModifiedBy(rs.getString(11));
 			bean.setCreatedDatetime(rs.getTimestamp(12));
 			bean.setModifiedDatetime(rs.getTimestamp(13));
@@ -185,7 +185,7 @@ public class UserModel {
 			bean.setMobileNo(rs.getString(7));
 			bean.setRoleId(rs.getLong(8));
 			bean.setGender(rs.getString(9));
-			bean.setCratedBy(rs.getString(10));
+			bean.setCreatedBy(rs.getString(10));
 			bean.setModifiedBy(rs.getString(11));
 			bean.setCreatedDatetime(rs.getTimestamp(12));
 			bean.setModifiedDatetime(rs.getTimestamp(13));
@@ -230,8 +230,8 @@ public class UserModel {
 			if (bean.getGender() != null) {
 				sql.append(" and gender like '" + bean.getGender() + "%'");
 			}
-			if (bean.getCratedBy() != null) {
-				sql.append(" and created_by like '" + bean.getCratedBy() + "%'");
+			if (bean.getCreatedBy() != null) {
+				sql.append(" and created_by like '" + bean.getCreatedBy() + "%'");
 			}
 			if (bean.getModifiedBy() != null) {
 				sql.append(" and modified_by like '" + bean.getModifiedBy() + "%'");
@@ -267,7 +267,7 @@ public class UserModel {
 			bean.setMobileNo(rs.getString(7));
 			bean.setRoleId(rs.getLong(8));
 			bean.setGender(rs.getString(9));
-			bean.setCratedBy(rs.getString(10));
+			bean.setCreatedBy(rs.getString(10));
 			bean.setModifiedBy(rs.getString(11));
 			bean.setCreatedDatetime(rs.getTimestamp(12));
 			bean.setModifiedDatetime(rs.getTimestamp(13));

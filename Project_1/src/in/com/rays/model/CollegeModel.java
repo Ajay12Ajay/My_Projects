@@ -25,13 +25,12 @@ public class CollegeModel {
 
 	public void add(CollegeBean bean) throws Exception {
 
-		/*
-		 * RoleBean beanExists = findByName(bean.getName());
-		 * 
-		 * if (beanExists != null) { throw new Exception("Name already exist");
-		 * 
-		 * }
-		 */
+		CollegeBean beanExists = findByName(bean.getName());
+
+		if (beanExists != null) {
+			throw new Exception("Name already exist");
+
+		}
 
 		int pk = getNextPk();
 
@@ -51,7 +50,7 @@ public class CollegeModel {
 			pstmt.setString(4, bean.getState());
 			pstmt.setString(5, bean.getCity());
 			pstmt.setString(6, bean.getPhoneNo());
-			pstmt.setString(7, bean.getCratedBy());
+			pstmt.setString(7, bean.getCreatedBy());
 			pstmt.setString(8, bean.getModifiedBy());
 			pstmt.setTimestamp(9, bean.getCreatedDatetime());
 			pstmt.setTimestamp(10, bean.getModifiedDatetime());
@@ -73,14 +72,12 @@ public class CollegeModel {
 
 	public void update(CollegeBean bean) throws Exception {
 
-		/*
-		 * RoleBean beanExists = findByName(bean.getName()); if (beanExists != null &&
-		 * bean.getId() == beanExists.getId()) {
-		 * 
-		 * throw new Exception("Name already exists");
-		 * 
-		 * }
-		 */
+		CollegeBean beanExists = findByName(bean.getName());
+		if (beanExists != null && bean.getId() == beanExists.getId()) {
+
+			throw new Exception("Name already exists");
+
+		}
 
 		Connection conn = null;
 
@@ -95,7 +92,7 @@ public class CollegeModel {
 			pstmt.setString(3, bean.getState());
 			pstmt.setString(4, bean.getCity());
 			pstmt.setString(5, bean.getPhoneNo());
-			pstmt.setString(6, bean.getCratedBy());
+			pstmt.setString(6, bean.getCreatedBy());
 			pstmt.setString(7, bean.getModifiedBy());
 			pstmt.setTimestamp(8, bean.getCreatedDatetime());
 			pstmt.setTimestamp(9, bean.getModifiedDatetime());
@@ -142,7 +139,33 @@ public class CollegeModel {
 			bean.setState(rs.getString(4));
 			bean.setCity(rs.getString(5));
 			bean.setPhoneNo(rs.getString(6));
-			bean.setCratedBy(rs.getString(7));
+			bean.setCreatedBy(rs.getString(7));
+			bean.setModifiedBy(rs.getString(8));
+			bean.setCreatedDatetime(rs.getTimestamp(9));
+			bean.setModifiedDatetime(rs.getTimestamp(10));
+
+		}
+
+		return bean;
+
+	}
+
+	public CollegeBean findByName(String name) throws Exception {
+		Connection conn = JDBCDataSource.getConnection();
+		PreparedStatement pstmt = conn.prepareStatement("select * from st_college where name = ?");
+		pstmt.setString(1, name);
+
+		ResultSet rs = pstmt.executeQuery();
+		CollegeBean bean = null;
+		while (rs.next()) {
+			bean = new CollegeBean();
+			bean.setId(rs.getLong(1));
+			bean.setName(rs.getString(2));
+			bean.setAddress(rs.getString(3));
+			bean.setState(rs.getString(4));
+			bean.setCity(rs.getString(5));
+			bean.setPhoneNo(rs.getString(6));
+			bean.setCreatedBy(rs.getString(7));
 			bean.setModifiedBy(rs.getString(8));
 			bean.setCreatedDatetime(rs.getTimestamp(9));
 			bean.setModifiedDatetime(rs.getTimestamp(10));
@@ -179,8 +202,8 @@ public class CollegeModel {
 			if (bean.getPhoneNo() != null) {
 				sql.append(" and phone_no like '" + bean.getPhoneNo() + "%'");
 			}
-			if (bean.getCratedBy() != null) {
-				sql.append(" and created_by like '" + bean.getCratedBy() + "%'");
+			if (bean.getCreatedBy() != null) {
+				sql.append(" and created_by like '" + bean.getCreatedBy() + "%'");
 			}
 			if (bean.getModifiedBy() != null) {
 				sql.append(" and modified_by like '" + bean.getModifiedBy() + "%'");
@@ -213,7 +236,7 @@ public class CollegeModel {
 			bean.setState(rs.getString(4));
 			bean.setCity(rs.getString(5));
 			bean.setPhoneNo(rs.getString(6));
-			bean.setCratedBy(rs.getString(7));
+			bean.setCreatedBy(rs.getString(7));
 			bean.setModifiedBy(rs.getString(8));
 			bean.setCreatedDatetime(rs.getTimestamp(9));
 			bean.setModifiedDatetime(rs.getTimestamp(10));

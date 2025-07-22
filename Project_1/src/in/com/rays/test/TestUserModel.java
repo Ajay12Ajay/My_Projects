@@ -33,7 +33,7 @@ public class TestUserModel {
 		bean.setMobileNo("2222222222");
 		bean.setRoleId(2);
 		bean.setGender("Male");
-		bean.setCratedBy("ADMIN");
+		bean.setCreatedBy("ADMIN");
 		bean.setModifiedBy("ADMIN");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
@@ -56,7 +56,7 @@ public class TestUserModel {
 		bean.setMobileNo("5555555555");
 		bean.setRoleId(1);
 		bean.setGender("Male");
-		bean.setCratedBy("ADMIN");
+		bean.setCreatedBy("ADMIN");
 		bean.setModifiedBy("ADMIN");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
@@ -110,7 +110,7 @@ public class TestUserModel {
 			System.out.print("\t" + bean.getMobileNo());
 			System.out.print("\t" + bean.getRoleId());
 			System.out.print("\t" + bean.getGender());
-			System.out.print("\t" + bean.getCratedBy());
+			System.out.print("\t" + bean.getCreatedBy());
 			System.out.print("\t" + bean.getModifiedBy());
 			System.out.print("\t" + bean.getCreatedDatetime());
 			System.out.println("\t" + bean.getModifiedDatetime());
@@ -133,7 +133,7 @@ public class TestUserModel {
 		// bean.setMobileNo();
 		// bean.setRoleId();
 		// bean.setGender("Male");
-		bean.setCratedBy("Admin");
+		bean.setCreatedBy("Admin");
 		// bean.setModifiedBy();
 		// bean.setCreatedDatetime();
 		// bean.setModifiedDatetime();
@@ -155,7 +155,7 @@ public class TestUserModel {
 			System.out.print("\t" + bean.getMobileNo());
 			System.out.print("\t" + bean.getRoleId());
 			System.out.print("\t" + bean.getGender());
-			System.out.print("\t" + bean.getCratedBy());
+			System.out.print("\t" + bean.getCreatedBy());
 			System.out.print("\t" + bean.getModifiedBy());
 			System.out.print("\t" + bean.getCreatedDatetime());
 			System.out.println("\t" + bean.getModifiedDatetime());

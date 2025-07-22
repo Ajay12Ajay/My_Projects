@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class BaseBean {
 
 	private long id;
-	private String cratedBy;
+	private String createdBy;
 	private String modifiedBy;
 	private Timestamp createdDatetime;
 	private Timestamp modifiedDatetime;
@@ -18,12 +18,12 @@ public class BaseBean {
 		this.id = id;
 	}
 
-	public String getCratedBy() {
-		return cratedBy;
+	public String getCreatedBy() {
+		return createdBy;
 	}
 
-	public void setCratedBy(String cratedBy) {
-		this.cratedBy = cratedBy;
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 
 	public String getModifiedBy() {

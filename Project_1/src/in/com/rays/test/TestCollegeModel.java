@@ -15,7 +15,8 @@ public class TestCollegeModel {
 		// testUpdate();
 		// testDelete();
 		// testFindByPk();
-		testSearch();
+		// testFindByName();
+		// testSearch();
 
 	}
 
@@ -27,7 +28,7 @@ public class TestCollegeModel {
 		bean.setState("MP");
 		bean.setCity("Indore");
 		bean.setPhoneNo("1212121212");
-		bean.setCratedBy("ADMIN");
+		bean.setCreatedBy("ADMIN");
 		bean.setModifiedBy("ADMIN");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
@@ -46,7 +47,7 @@ public class TestCollegeModel {
 		bean.setState("MP");
 		bean.setCity("Indore");
 		bean.setPhoneNo("1212121212");
-		bean.setCratedBy("ADMIN");
+		bean.setCreatedBy("ADMIN");
 		bean.setModifiedBy("ADMIN");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
@@ -73,7 +74,7 @@ public class TestCollegeModel {
 			System.out.print("\t" + bean.getState());
 			System.out.print("\t" + bean.getCity());
 			System.out.print("\t" + bean.getPhoneNo());
-			System.out.print("\t" + bean.getCratedBy());
+			System.out.print("\t" + bean.getCreatedBy());
 			System.out.print("\t" + bean.getModifiedBy());
 			System.out.print("\t" + bean.getCreatedDatetime());
 			System.out.println("\t" + bean.getModifiedDatetime());
@@ -82,16 +83,38 @@ public class TestCollegeModel {
 		}
 	}
 
+	public static void testFindByName() throws Exception {
+
+		CollegeModel model = new CollegeModel();
+		CollegeBean bean = model.findByName("SVCE");
+
+		if (bean != null) {
+			System.out.print("\t" + bean.getId());
+			System.out.print("\t" + bean.getName());
+			System.out.print("\t" + bean.getAddress());
+			System.out.print("\t" + bean.getState());
+			System.out.print("\t" + bean.getCity());
+			System.out.print("\t" + bean.getPhoneNo());
+			System.out.print("\t" + bean.getCreatedBy());
+			System.out.print("\t" + bean.getModifiedBy());
+			System.out.print("\t" + bean.getCreatedDatetime());
+			System.out.println("\t" + bean.getModifiedDatetime());
+		} else {
+			System.out.println("id doesn't exists");
+		}
+
+	}
+
 	public static void testSearch() throws Exception {
 
 		CollegeBean bean = new CollegeBean();
-		 //bean.setId(1);
-		 //bean.setName("SVCE");
-		 //bean.setAddress("address of SVCE");
-		 //bean.setCity("Indore");
+		// bean.setId(1);
+		// bean.setName("SVCE");
+		// bean.setAddress("address of SVCE");
+		// bean.setCity("Indore");
 		// bean.setState("MP");
 		// bean.setPhoneNo("1212121212");
-		// bean.setCratedBy("ADMIN");
+		// bean.setCreatedBy("ADMIN");
 		// bean.setModifiedBy("ADMIN");
 		// bean.setCreatedDatetime();
 		// bean.setModifiedDatetime();
@@ -110,7 +133,7 @@ public class TestCollegeModel {
 			System.out.print("\t" + bean.getState());
 			System.out.print("\t" + bean.getCity());
 			System.out.print("\t" + bean.getPhoneNo());
-			System.out.print("\t" + bean.getCratedBy());
+			System.out.print("\t" + bean.getCreatedBy());
 			System.out.print("\t" + bean.getModifiedBy());
 			System.out.print("\t" + bean.getCreatedDatetime());
 			System.out.println("\t" + bean.getModifiedDatetime());

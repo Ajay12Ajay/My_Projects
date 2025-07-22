@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import in.com.rays.bean.StudentBean;
 import in.com.rays.util.JDBCDataSource;
 
@@ -26,13 +25,12 @@ public class StudentModel {
 
 	public void add(StudentBean bean) throws Exception {
 
-		/*
-		 * RoleBean beanExists = findByName(bean.getName());
-		 * 
-		 * if (beanExists != null) { throw new Exception("Name already exist");
-		 * 
-		 * }
-		 */
+		StudentBean beanExists = findByEmailId(bean.getEmail());
+
+		if (beanExists != null) {
+			throw new Exception("Email already exist");
+
+		}
 
 		int pk = getNextPk();
 
@@ -55,7 +53,7 @@ public class StudentModel {
 			pstmt.setString(7, bean.getEmail());
 			pstmt.setLong(8, bean.getCollegeId());
 			pstmt.setString(9, bean.getCollegeName());
-			pstmt.setString(10, bean.getCratedBy());
+			pstmt.setString(10, bean.getCreatedBy());
 			pstmt.setString(11, bean.getModifiedBy());
 			pstmt.setTimestamp(12, bean.getCreatedDatetime());
 			pstmt.setTimestamp(13, bean.getModifiedDatetime());
@@ -77,14 +75,12 @@ public class StudentModel {
 
 	public void update(StudentBean bean) throws Exception {
 
-		/*
-		 * RoleBean beanExists = findByName(bean.getName()); if (beanExists != null &&
-		 * bean.getId() == beanExists.getId()) {
-		 * 
-		 * throw new Exception("Name already exists");
-		 * 
-		 * }
-		 */
+		StudentBean beanExists = findByEmailId(bean.getEmail());
+		if (beanExists != null && bean.getId() == beanExists.getId()) {
+
+			throw new Exception("Email already exists");
+
+		}
 
 		Connection conn = null;
 
@@ -102,7 +98,7 @@ public class StudentModel {
 			pstmt.setString(6, bean.getEmail());
 			pstmt.setLong(7, bean.getCollegeId());
 			pstmt.setString(8, bean.getCollegeName());
-			pstmt.setString(9, bean.getCratedBy());
+			pstmt.setString(9, bean.getCreatedBy());
 			pstmt.setString(10, bean.getModifiedBy());
 			pstmt.setTimestamp(11, bean.getCreatedDatetime());
 			pstmt.setTimestamp(12, bean.getModifiedDatetime());
@@ -134,7 +130,7 @@ public class StudentModel {
 
 	}
 
-	public StudentBean findByPk(int id) throws Exception {
+	public StudentBean findByPk(long id) throws Exception {
 		Connection conn = JDBCDataSource.getConnection();
 		PreparedStatement pstmt = conn.prepareStatement("select * from st_student where id = ?");
 		pstmt.setLong(1, id);
@@ -152,7 +148,36 @@ public class StudentModel {
 			bean.setEmail(rs.getString(7));
 			bean.setCollegeId(rs.getLong(8));
 			bean.setCollegeName(rs.getString(9));
-			bean.setCratedBy(rs.getString(10));
+			bean.setCreatedBy(rs.getString(10));
+			bean.setModifiedBy(rs.getString(11));
+			bean.setCreatedDatetime(rs.getTimestamp(12));
+			bean.setModifiedDatetime(rs.getTimestamp(13));
+
+		}
+
+		return bean;
+
+	}
+
+	public StudentBean findByEmailId(String email) throws Exception {
+		Connection conn = JDBCDataSource.getConnection();
+		PreparedStatement pstmt = conn.prepareStatement("select * from st_student where email = ?");
+		pstmt.setString(1, email);
+
+		ResultSet rs = pstmt.executeQuery();
+		StudentBean bean = null;
+		while (rs.next()) {
+			bean = new StudentBean();
+			bean.setId(rs.getInt(1));
+			bean.setFirstName(rs.getString(2));
+			bean.setLastName(rs.getString(3));
+			bean.setDob(rs.getDate(4));
+			bean.setGender(rs.getString(5));
+			bean.setMobileNo(rs.getString(6));
+			bean.setEmail(rs.getString(7));
+			bean.setCollegeId(rs.getLong(8));
+			bean.setCollegeName(rs.getString(9));
+			bean.setCreatedBy(rs.getString(10));
 			bean.setModifiedBy(rs.getString(11));
 			bean.setCreatedDatetime(rs.getTimestamp(12));
 			bean.setModifiedDatetime(rs.getTimestamp(13));
@@ -198,8 +223,8 @@ public class StudentModel {
 			if (bean.getCollegeName() != null) {
 				sql.append(" and college_name like '" + bean.getCollegeName() + "%'");
 			}
-			if (bean.getCratedBy() != null) {
-				sql.append(" and created_by like '" + bean.getCratedBy() + "%'");
+			if (bean.getCreatedBy() != null) {
+				sql.append(" and created_by like '" + bean.getCreatedBy() + "%'");
 			}
 			if (bean.getModifiedBy() != null) {
 				sql.append(" and modified_by like '" + bean.getModifiedBy() + "%'");
@@ -235,7 +260,7 @@ public class StudentModel {
 			bean.setEmail(rs.getString(7));
 			bean.setCollegeId(rs.getLong(8));
 			bean.setCollegeName(rs.getString(9));
-			bean.setCratedBy(rs.getString(10));
+			bean.setCreatedBy(rs.getString(10));
 			bean.setModifiedBy(rs.getString(11));
 			bean.setCreatedDatetime(rs.getTimestamp(12));
 			bean.setModifiedDatetime(rs.getTimestamp(13));

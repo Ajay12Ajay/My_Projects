@@ -16,7 +16,8 @@ public class TestStudentModel {
 		// testUpdate();
 		// testDelete();
 		// testFindByPk();
-		testSearch();
+		//testFindByEmailId();
+		 testSearch();
 
 	}
 
@@ -24,15 +25,15 @@ public class TestStudentModel {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 		StudentBean bean = new StudentBean();
-		bean.setFirstName("Aniket");
-		bean.setLastName("Rajput");
+		bean.setFirstName("Rohan");
+		bean.setLastName("Upadhya");
 		bean.setDob(sdf.parse("12/12/1997"));
 		bean.setGender("Male");
 		bean.setMobileNo("2112211221");
-		bean.setEmail("aniket@gmail.com");
+		bean.setEmail("rohan@gmail.com");
 		bean.setCollegeId(1);
 		bean.setCollegeName("BANSAL");
-		bean.setCratedBy("ADMIN");
+		bean.setCreatedBy("ADMIN");
 		bean.setModifiedBy("ADMIN");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
@@ -54,7 +55,7 @@ public class TestStudentModel {
 		bean.setEmail("aniket@gmail.com");
 		bean.setCollegeId(1);
 		bean.setCollegeName("BANSAL");
-		bean.setCratedBy("ADMIN");
+		bean.setCreatedBy("ADMIN");
 		bean.setModifiedBy("ADMIN");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
@@ -85,13 +86,38 @@ public class TestStudentModel {
 			System.out.print("\t" + bean.getEmail());
 			System.out.print("\t" + bean.getCollegeId());
 			System.out.print("\t" + bean.getCollegeName());
-			System.out.print("\t" + bean.getCratedBy());
+			System.out.print("\t" + bean.getCreatedBy());
 			System.out.print("\t" + bean.getModifiedBy());
 			System.out.print("\t" + bean.getCreatedDatetime());
 			System.out.println("\t" + bean.getModifiedDatetime());
 		} else {
 			System.out.println("id doesn't exists");
 		}
+	}
+
+	public static void testFindByEmailId() throws Exception {
+
+		StudentModel model = new StudentModel();
+		StudentBean bean = model.findByEmailId("rohan@gmail.com");
+
+		if (bean != null) {
+			System.out.print("\t" + bean.getId());
+			System.out.print("\t" + bean.getFirstName());
+			System.out.print("\t" + bean.getLastName());
+			System.out.print("\t" + bean.getDob());
+			System.out.print("\t" + bean.getGender());
+			System.out.print("\t" + bean.getMobileNo());
+			System.out.print("\t" + bean.getEmail());
+			System.out.print("\t" + bean.getCollegeId());
+			System.out.print("\t" + bean.getCollegeName());
+			System.out.print("\t" + bean.getCreatedBy());
+			System.out.print("\t" + bean.getModifiedBy());
+			System.out.print("\t" + bean.getCreatedDatetime());
+			System.out.println("\t" + bean.getModifiedDatetime());
+		} else {
+			System.out.println("id doesn't exists");
+		}
+
 	}
 
 	public static void testSearch() throws Exception {
@@ -106,7 +132,7 @@ public class TestStudentModel {
 		// bean.setEmail("UserAniket");
 		// bean.setCollegeId("222");
 		// bean.setCollegeName();
-		// bean.setCratedBy("Admin");
+		// bean.setCreatedBy("Admin");
 		// bean.setModifiedBy();
 		// bean.setCreatedDatetime();
 		// bean.setModifiedDatetime();
@@ -128,7 +154,7 @@ public class TestStudentModel {
 			System.out.print("\t" + bean.getEmail());
 			System.out.print("\t" + bean.getCollegeId());
 			System.out.print("\t" + bean.getCollegeName());
-			System.out.print("\t" + bean.getCratedBy());
+			System.out.print("\t" + bean.getCreatedBy());
 			System.out.print("\t" + bean.getModifiedBy());
 			System.out.print("\t" + bean.getCreatedDatetime());
 			System.out.println("\t" + bean.getModifiedDatetime());
