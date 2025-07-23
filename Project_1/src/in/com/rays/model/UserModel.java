@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import in.com.rays.bean.UserBean;
 import in.com.rays.util.JDBCDataSource;
 

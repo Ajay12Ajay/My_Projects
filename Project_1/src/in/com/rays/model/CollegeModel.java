@@ -124,7 +124,7 @@ public class CollegeModel {
 
 	}
 
-	public CollegeBean findByPk(int id) throws Exception {
+	public CollegeBean findByPk(long id) throws Exception {
 		Connection conn = JDBCDataSource.getConnection();
 		PreparedStatement pstmt = conn.prepareStatement("select * from st_college where id = ?");
 		pstmt.setLong(1, id);

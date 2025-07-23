@@ -6,16 +6,17 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.com.rays.bean.CollegeBean;
-import in.com.rays.bean.StudentBean;
+import in.com.rays.bean.CourseBean;
+import in.com.rays.bean.FacultyBean;
+import in.com.rays.bean.SubjectBean;
 import in.com.rays.util.JDBCDataSource;
 
-public class StudentModel {
+public class FacultyModel {
 
 	public static Integer getNextPk() throws Exception {
 		int pk = 0;
 		Connection conn = JDBCDataSource.getConnection();
-		PreparedStatement pstmt = conn.prepareStatement("select max(id) from st_student");
+		PreparedStatement pstmt = conn.prepareStatement("select max(id) from st_timetable");
 		ResultSet rs = pstmt.executeQuery();
 		while (rs.next()) {
 			pk = (rs.getInt(1));
@@ -24,18 +25,15 @@ public class StudentModel {
 
 	}
 
-	public void add(StudentBean bean) throws Exception {
+	public void add(FacultyBean bean) throws Exception {
 
-		CollegeModel collegeModel = new CollegeModel();
-		CollegeBean collegeBean = collegeModel.findByPk(bean.getCollegeId());
-		bean.setCollegeName(collegeBean.getName());
+		CourseModel courseModel = new CourseModel();
+		CourseBean courseBean = courseModel.findByPk(bean.getCourseId());
+		bean.setCourseName(courseBean.getName());
 
-		StudentBean beanExists = findByEmailId(bean.getEmail());
-
-		if (beanExists != null) {
-			throw new Exception("Email already exist");
-
-		}
+		SubjectModel subjectModel = new SubjectModel();
+		SubjectBean subjectBean = subjectModel.findByPk(bean.getSubjectId());
+		bean.setSubjectName(subjectBean.getName());
 
 		int pk = getNextPk();
 
@@ -47,7 +45,8 @@ public class StudentModel {
 
 			conn.setAutoCommit(false);
 
-			PreparedStatement pstmt = conn.prepareStatement("insert into st_student values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement pstmt = conn
+					.prepareStatement("insert into st_faculty values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
 			pstmt.setLong(1, pk);
 			pstmt.setString(2, bean.getFirstName());
@@ -56,14 +55,16 @@ public class StudentModel {
 			pstmt.setString(5, bean.getGender());
 			pstmt.setString(6, bean.getMobileNo());
 			pstmt.setString(7, bean.getEmail());
-
 			pstmt.setLong(8, bean.getCollegeId());
 			pstmt.setString(9, bean.getCollegeName());
-
-			pstmt.setString(10, bean.getCreatedBy());
-			pstmt.setString(11, bean.getModifiedBy());
-			pstmt.setTimestamp(12, bean.getCreatedDatetime());
-			pstmt.setTimestamp(13, bean.getModifiedDatetime());
+			pstmt.setLong(10, bean.getCourseId());
+			pstmt.setString(11, bean.getCourseName());
+			pstmt.setLong(12, bean.getSubjectId());
+			pstmt.setString(13, bean.getSubjectName());
+			pstmt.setString(14, bean.getCreatedBy());
+			pstmt.setString(15, bean.getModifiedBy());
+			pstmt.setTimestamp(16, bean.getCreatedDatetime());
+			pstmt.setTimestamp(17, bean.getModifiedDatetime());
 			int i = pstmt.executeUpdate();
 			System.out.println("Data Inserted : " + i);
 
@@ -80,18 +81,15 @@ public class StudentModel {
 
 	}
 
-	public void update(StudentBean bean) throws Exception {
+	public void update(FacultyBean bean) throws Exception {
 
-		CollegeModel collegeModel = new CollegeModel();
-		CollegeBean collegeBean = collegeModel.findByPk(bean.getCollegeId());
-		bean.setCollegeName(collegeBean.getName());
+		CourseModel courseModel = new CourseModel();
+		CourseBean courseBean = courseModel.findByPk(bean.getCourseId());
+		bean.setCourseName(courseBean.getName());
 
-		StudentBean beanExists = findByEmailId(bean.getEmail());
-		if (beanExists != null && bean.getId() == beanExists.getId()) {
-
-			throw new Exception("Email already exists");
-
-		}
+		SubjectModel subjectModel = new SubjectModel();
+		SubjectBean subjectBean = subjectModel.findByPk(bean.getSubjectId());
+		bean.setSubjectName(subjectBean.getName());
 
 		Connection conn = null;
 
@@ -99,7 +97,7 @@ public class StudentModel {
 			conn = JDBCDataSource.getConnection();
 			conn.setAutoCommit(false);
 			PreparedStatement pstmt = conn.prepareStatement(
-					"update st_student set first_name= ?, last_name= ?, dob= ?, gender= ?, mobile_no= ?, email= ? ,college_id= ?, college_name= ? , created_by= ?, modified_by= ?, created_datetime= ?, modified_datetime= ? where id= ?");
+					"update st_faculty set first_name= ?, last_name= ?, dob= ?, gender= ?, mobile_no= ?, email= ?, college_id= ?, college_name= ?, course_id= ?, course_name= ? ,subject_id= ?, subject_name= ? , created_by= ?, modified_by= ?, created_datetime= ?, modified_datetime= ? where id= ?");
 
 			pstmt.setString(1, bean.getFirstName());
 			pstmt.setString(2, bean.getLastName());
@@ -109,11 +107,15 @@ public class StudentModel {
 			pstmt.setString(6, bean.getEmail());
 			pstmt.setLong(7, bean.getCollegeId());
 			pstmt.setString(8, bean.getCollegeName());
-			pstmt.setString(9, bean.getCreatedBy());
-			pstmt.setString(10, bean.getModifiedBy());
-			pstmt.setTimestamp(11, bean.getCreatedDatetime());
-			pstmt.setTimestamp(12, bean.getModifiedDatetime());
-			pstmt.setLong(13, bean.getId());
+			pstmt.setLong(9, bean.getCourseId());
+			pstmt.setString(10, bean.getCourseName());
+			pstmt.setLong(11, bean.getSubjectId());
+			pstmt.setString(12, bean.getSubjectName());
+			pstmt.setString(13, bean.getCreatedBy());
+			pstmt.setString(14, bean.getModifiedBy());
+			pstmt.setTimestamp(15, bean.getCreatedDatetime());
+			pstmt.setTimestamp(16, bean.getModifiedDatetime());
+			pstmt.setLong(17, bean.getId());
 
 			int i = pstmt.executeUpdate();
 			System.out.println("Data Update : " + i);
@@ -133,7 +135,7 @@ public class StudentModel {
 
 	public void delete(int id) throws Exception {
 		Connection conn = JDBCDataSource.getConnection();
-		PreparedStatement pstmt = conn.prepareStatement("delete from st_student where id = ?");
+		PreparedStatement pstmt = conn.prepareStatement("delete from st_faculty where id = ?");
 		pstmt.setLong(1, id);
 
 		int i = pstmt.executeUpdate();
@@ -141,15 +143,15 @@ public class StudentModel {
 
 	}
 
-	public StudentBean findByPk(long id) throws Exception {
+	public FacultyBean findByPk(long id) throws Exception {
 		Connection conn = JDBCDataSource.getConnection();
-		PreparedStatement pstmt = conn.prepareStatement("select * from st_student where id = ?");
+		PreparedStatement pstmt = conn.prepareStatement("select * from st_faculty  where id = ?");
 		pstmt.setLong(1, id);
 
 		ResultSet rs = pstmt.executeQuery();
-		StudentBean bean = null;
+		FacultyBean bean = null;
 		while (rs.next()) {
-			bean = new StudentBean();
+			bean = new FacultyBean();
 			bean.setId(rs.getInt(1));
 			bean.setFirstName(rs.getString(2));
 			bean.setLastName(rs.getString(3));
@@ -159,10 +161,14 @@ public class StudentModel {
 			bean.setEmail(rs.getString(7));
 			bean.setCollegeId(rs.getLong(8));
 			bean.setCollegeName(rs.getString(9));
-			bean.setCreatedBy(rs.getString(10));
-			bean.setModifiedBy(rs.getString(11));
-			bean.setCreatedDatetime(rs.getTimestamp(12));
-			bean.setModifiedDatetime(rs.getTimestamp(13));
+			bean.setCourseId(rs.getLong(10));
+			bean.setCourseName(rs.getString(11));
+			bean.setSubjectId(rs.getLong(12));
+			bean.setSubjectName(rs.getString(13));
+			bean.setCreatedBy(rs.getString(14));
+			bean.setModifiedBy(rs.getString(15));
+			bean.setCreatedDatetime(rs.getTimestamp(16));
+			bean.setModifiedDatetime(rs.getTimestamp(17));
 
 		}
 
@@ -170,15 +176,15 @@ public class StudentModel {
 
 	}
 
-	public StudentBean findByEmailId(String email) throws Exception {
+	public FacultyBean findByEmail(String email) throws Exception {
 		Connection conn = JDBCDataSource.getConnection();
-		PreparedStatement pstmt = conn.prepareStatement("select * from st_student where email = ?");
+		PreparedStatement pstmt = conn.prepareStatement("select * from st_faculty  where email = ?");
 		pstmt.setString(1, email);
 
 		ResultSet rs = pstmt.executeQuery();
-		StudentBean bean = null;
+		FacultyBean bean = null;
 		while (rs.next()) {
-			bean = new StudentBean();
+			bean = new FacultyBean();
 			bean.setId(rs.getInt(1));
 			bean.setFirstName(rs.getString(2));
 			bean.setLastName(rs.getString(3));
@@ -188,10 +194,14 @@ public class StudentModel {
 			bean.setEmail(rs.getString(7));
 			bean.setCollegeId(rs.getLong(8));
 			bean.setCollegeName(rs.getString(9));
-			bean.setCreatedBy(rs.getString(10));
-			bean.setModifiedBy(rs.getString(11));
-			bean.setCreatedDatetime(rs.getTimestamp(12));
-			bean.setModifiedDatetime(rs.getTimestamp(13));
+			bean.setCourseId(rs.getLong(10));
+			bean.setCourseName(rs.getString(11));
+			bean.setSubjectId(rs.getLong(12));
+			bean.setSubjectName(rs.getString(13));
+			bean.setCreatedBy(rs.getString(14));
+			bean.setModifiedBy(rs.getString(15));
+			bean.setCreatedDatetime(rs.getTimestamp(16));
+			bean.setModifiedDatetime(rs.getTimestamp(17));
 
 		}
 
@@ -199,11 +209,11 @@ public class StudentModel {
 
 	}
 
-	public List search(StudentBean bean, int pageNo, int pageSize) throws Exception {
+	public List search(FacultyBean bean, int pageNo, int pageSize) throws Exception {
 
 		Connection conn = JDBCDataSource.getConnection();
 
-		StringBuffer sql = new StringBuffer("select * from st_student where 1=1 ");
+		StringBuffer sql = new StringBuffer("select * from st_faculty where 1=1 ");
 
 		if (bean != null) {
 
@@ -229,10 +239,23 @@ public class StudentModel {
 				sql.append(" and email like '" + bean.getEmail() + "%'");
 			}
 			if (bean.getCollegeId() < 0) {
-				sql.append(" and college_id =" + bean.getCollegeId());
+				sql.append(" and college_id =" + bean.getFirstName());
 			}
 			if (bean.getCollegeName() != null) {
 				sql.append(" and college_name like '" + bean.getCollegeName() + "%'");
+			}
+
+			if (bean.getCourseId() < 0) {
+				sql.append(" and course_id =" + bean.getCourseId());
+			}
+			if (bean.getCourseName() != null) {
+				sql.append(" and course_name like '" + bean.getCourseName() + "%'");
+			}
+			if (bean.getSubjectId() < 0) {
+				sql.append(" and subject_id =" + bean.getSubjectId());
+			}
+			if (bean.getSubjectName() != null) {
+				sql.append(" and subject_name like '" + bean.getSubjectName() + "%'");
 			}
 			if (bean.getCreatedBy() != null) {
 				sql.append(" and created_by like '" + bean.getCreatedBy() + "%'");
@@ -261,7 +284,7 @@ public class StudentModel {
 
 		List list = new ArrayList();
 		while (rs.next()) {
-			bean = new StudentBean();
+			bean = new FacultyBean();
 			bean.setId(rs.getLong(1));
 			bean.setFirstName(rs.getString(2));
 			bean.setLastName(rs.getString(3));
@@ -271,10 +294,14 @@ public class StudentModel {
 			bean.setEmail(rs.getString(7));
 			bean.setCollegeId(rs.getLong(8));
 			bean.setCollegeName(rs.getString(9));
-			bean.setCreatedBy(rs.getString(10));
-			bean.setModifiedBy(rs.getString(11));
-			bean.setCreatedDatetime(rs.getTimestamp(12));
-			bean.setModifiedDatetime(rs.getTimestamp(13));
+			bean.setCourseId(rs.getLong(10));
+			bean.setCourseName(rs.getString(11));
+			bean.setSubjectId(rs.getLong(12));
+			bean.setSubjectName(rs.getString(13));
+			bean.setCreatedBy(rs.getString(14));
+			bean.setModifiedBy(rs.getString(15));
+			bean.setCreatedDatetime(rs.getTimestamp(16));
+			bean.setModifiedDatetime(rs.getTimestamp(17));
 
 			list.add(bean);
 		}

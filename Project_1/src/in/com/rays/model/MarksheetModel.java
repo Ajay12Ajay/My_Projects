@@ -28,6 +28,11 @@ public class MarksheetModel {
 
 	public void add(MarksheetBean bean) throws Exception {
 
+		/*
+		 * StudentModel studentModel = new StudentModel(); StudentBean studentBean =
+		 * studentModel.findByPk(bean.getStudentId());
+		 * bean.setName(studentBean.getFirstName() + studentBean.getLastName());
+		 */
 		MarksheetBean beanExists = findByRollNo(bean.getRollNo());
 
 		if (beanExists != null) {
@@ -50,13 +55,8 @@ public class MarksheetModel {
 			pstmt.setLong(1, pk);
 			pstmt.setString(2, bean.getRollNo());
 
-			StudentModel stuModel = new StudentModel();
-			StudentBean stuBean = stuModel.findByPk(bean.getStudentId());
-			if (stuBean != null) {
-				pstmt.setLong(3, stuBean.getId());
-				pstmt.setString(4, stuBean.getFirstName() + " " + stuBean.getLastName());
-
-			}
+			pstmt.setLong(3, bean.getStudentId());
+			pstmt.setString(4, bean.getName());
 
 			pstmt.setInt(5, bean.getPhysics());
 			pstmt.setInt(6, bean.getChemistry());
@@ -84,6 +84,11 @@ public class MarksheetModel {
 
 	public void update(MarksheetBean bean) throws Exception {
 
+		/*
+		 * StudentModel studentModel = new StudentModel(); StudentBean studentBean =
+		 * studentModel.findByPk(bean.getStudentId());
+		 * bean.setName(studentBean.getFirstName() + studentBean.getLastName());
+		 */
 		MarksheetBean beanExists = findByRollNo(bean.getRollNo());
 		if (beanExists != null && bean.getId() == beanExists.getId()) {
 

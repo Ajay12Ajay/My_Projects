@@ -13,12 +13,12 @@ import in.com.rays.model.MarksheetModel;
 public class TestMarksheetModel {
 
 	public static void main(String[] args) throws Exception {
-		testAdd();
-		// testUpdate();
+		// testAdd();
+		//testUpdate();
 		// testDelete();
 		// testFindByPk();
 		// testFindByRollNO();
-		testSearch();
+		// testSearch();
 
 	}
 
@@ -26,7 +26,7 @@ public class TestMarksheetModel {
 		MarksheetBean bean = new MarksheetBean();
 		bean.setRollNo("1303101");
 		bean.setStudentId(111);
-		// bean.setName("Malay Rajput");
+		bean.setName("Malay Rajput");
 		bean.setPhysics(66);
 		bean.setChemistry(77);
 		bean.setMaths(88);
@@ -43,7 +43,7 @@ public class TestMarksheetModel {
 
 		MarksheetBean bean = new MarksheetBean();
 
-		bean.setId(2);
+		bean.setId(1);
 		bean.setRollNo("1303101");
 		bean.setStudentId(111);
 		bean.setName("Aniket Rajput");
