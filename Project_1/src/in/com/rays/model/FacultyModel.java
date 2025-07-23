@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.com.rays.bean.CollegeBean;
 import in.com.rays.bean.CourseBean;
 import in.com.rays.bean.FacultyBean;
 import in.com.rays.bean.SubjectBean;
@@ -26,6 +27,10 @@ public class FacultyModel {
 	}
 
 	public void add(FacultyBean bean) throws Exception {
+
+		CollegeModel collegeModel = new CollegeModel();
+		CollegeBean collegeBean = collegeModel.findByPk(bean.getCollegeId());
+		bean.setCollegeName(collegeBean.getName());
 
 		CourseModel courseModel = new CourseModel();
 		CourseBean courseBean = courseModel.findByPk(bean.getCourseId());
@@ -82,6 +87,10 @@ public class FacultyModel {
 	}
 
 	public void update(FacultyBean bean) throws Exception {
+
+		CollegeModel collegeModel = new CollegeModel();
+		CollegeBean collegeBean = collegeModel.findByPk(bean.getCollegeId());
+		bean.setCollegeName(collegeBean.getName());
 
 		CourseModel courseModel = new CourseModel();
 		CourseBean courseBean = courseModel.findByPk(bean.getCourseId());
